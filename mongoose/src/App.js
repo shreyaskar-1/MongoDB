@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const validator = require('validator');
 
 // connection creation and creating a new db if not already present
 mongoose.connect("mongodb://localhost:27017/latest")
@@ -16,6 +17,17 @@ mongoose.connect("mongodb://localhost:27017/latest")
       required: true
     },
     age:Number,
+    email:{
+      type:String,
+      required:true,
+      unique:true,
+      // Using Npm validator
+      validate(value){
+        if(!validator.isEmail(value)){
+          throw new Error("Email is Invalid");
+        }
+      }
+    },
     profile:String,
     createdAt:{
       type:Date,
@@ -168,9 +180,14 @@ const deleteDocument = async (_id) =>{
 //     throw new Error('videos count should not be nagative')
 //   }
 // }
+// or we can use it in this way too
+// validate:{
+//   validator:function(value){
+//     return value.lenght < 0
+//   },
+//   message:"videos count should not be negative"
+// }
 
-
-
-
-
-
+// using npm validator
+// const validator = require('validator');
+// example above in the schema
