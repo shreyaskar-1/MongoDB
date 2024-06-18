@@ -134,7 +134,42 @@ const updateDocument = async (_id) =>{
     console.log(err);
   }
 }
-updateDocument("666de1fa98a39f3423781697")
+// updateDocument("666de1fa98a39f3423781697")
+
+// deleting the document
+// we can also use delete one or delete many
+const deleteDocument = async (_id) =>{
+  try{
+    const res = await Test.findByIdAndDelete({_id});
+    console.log(res);
+  }catch(err){
+    console.log(err);
+  }
+}
+// deleteDocument("666de1fa98a39f3423781699");
+
+// Validation in Mongo
+// we can use validate in mongoose to validate the data before saving it to the database
+// it is used in the schema of the database
+// we can use methods like:-
+// uupercase
+// lowercase
+// trim : trims unwanted spaces from start and end
+// match
+// min_lenght:can be used only with strings 
+// max_lenght:can be used only with strings
+// enum:creates a vallidator that checks if the value is in the given array
+
+// creation of custom validation
+// using validate
+// ex:-
+// Validate(value){
+//   if (value<0){
+//     throw new Error('videos count should not be nagative')
+//   }
+// }
+
+
 
 
 
